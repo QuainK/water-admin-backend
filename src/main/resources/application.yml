@@ -1,0 +1,22 @@
+server:
+    #端口
+    port: 8082
+spring:
+    datasource:
+        # 数据库地址
+        url: jdbc:mysql://localhost:3306/water_database
+        # 用户名
+        username: root
+        # 密码
+        password: root
+    jpa:
+        hibernate:
+            # 自动创建、更新、验证数据库表结构
+            ddl-auto: update
+        # 控制台是否显示sql
+        show-sql: true
+    jackson:
+        # 全局日期时间格式
+        date-format: yyyy-MM-dd HH:mm:ss
+        # 全局时区
+        time-zone: Asia/Shanghai
