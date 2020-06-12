@@ -6,4 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 @JsonIgnoreProperties({"handler", "hibernateLazyInitializer"})
 public interface WaterLocationRepository extends JpaRepository<WaterLocation, Integer> {
+    // 查询某个水表位置
+    WaterLocation findWaterLocationByWaterId(Integer waterId);
 }
