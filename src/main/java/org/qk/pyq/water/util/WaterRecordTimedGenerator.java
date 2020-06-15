@@ -7,8 +7,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /*
@@ -37,6 +39,7 @@ public class WaterRecordTimedGenerator {
             String name;
             double instantUsage;
             StringBuilder stringInstantUsage = new StringBuilder();
+            long recordDate;
 
             waterId = waterLocation.getWaterId(); // 获取水表编号
             name = waterLocation.getName(); //　获取水表名称
@@ -46,18 +49,20 @@ public class WaterRecordTimedGenerator {
             instantUsage = Double.parseDouble(stringInstantUsage.toString());
 
             // 日期时间
-            Date dateTime = new Date();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String stringRecordDate = sdf.format(dateTime);
+            Instant instant = Instant.now();
+            recordDate = instant.getEpochSecond();
 
             // 添加记录
-            waterRecordService.waterRecordAddOrUpdateOne(null, waterId, stringRecordDate, instantUsage);
+            waterRecordService.waterRecordAddOrUpdateOne(null, waterId, recordDate, instantUsage);
 
             // 终端输出
-            System.out.println(" --- " + stringRecordDate
-                + " --- \t已生成随机记录。\t水表编号: " + waterId
-                + "\t , 瞬时用量: " + instantUsage
-                + "\t , 水表名称: " + name);
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            ZonedDateTime zonedDateTime = instant.atZone(ZoneId.systemDefault());
+            String recordDateToPrint = zonedDateTime.format(dateTimeFormatter);
+            System.out.println(" --- " + recordDateToPrint
+                + " --- \t已生成随机记录\t水表编号: " + waterId
+                + "\t瞬时用量: " + instantUsage
+                + "\t水表名称: " + name);
         }
     }
 }

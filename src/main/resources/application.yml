@@ -14,7 +14,7 @@ spring:
             # 自动创建、更新、验证数据库表结构
             ddl-auto: update
         # 控制台是否显示sql
-        show-sql: true
+        show-sql: false
         # 是否启动 OSIV (Open Session In View)
         open-in-view: false
     jackson:

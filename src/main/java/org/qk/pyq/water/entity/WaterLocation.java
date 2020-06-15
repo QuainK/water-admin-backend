@@ -19,6 +19,9 @@ public class WaterLocation {
     @Column(name = "latitude")
     private Double latitude;
 
+    @Column(name = "total_usage")
+    private Double totalUsage;
+
     public Integer getWaterId() {
         return waterId;
     }
@@ -49,5 +52,13 @@ public class WaterLocation {
 
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
+    }
+
+    public Double getTotalUsage() {
+        return totalUsage;
+    }
+
+    public void setTotalUsage(Double totalUsage) {
+        this.totalUsage = totalUsage;
     }
 }

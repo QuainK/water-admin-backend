@@ -10,7 +10,7 @@
     </parent>
     <groupId>org.qk.pyq.water</groupId>
     <artifactId>water-sys-back-end</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
     <name>water-sys-back-end</name>
     <description>水务用量管理系统 Water Sys 后端</description>
 
