@@ -31,7 +31,7 @@ public class WaterRecordController {
     }
 
     // GET 查询某个水表的所有记录 /records/233/all
-    @GetMapping("/record/{waterId}/all")
+    @GetMapping("/records/{waterId}/all")
     public List<WaterRecord> waterRecordGetAllByWaterId(@PathVariable("waterId") Integer waterId) {
         System.out.format(" --- 响应 GET 查询某个水表的所有记录 /records/%d/all\n", waterId);
         return waterRecordService.waterRecordFindAllByWaterId(waterId);
@@ -44,7 +44,7 @@ public class WaterRecordController {
         @RequestParam(name = "pageIndex", defaultValue = "0") Integer pageIndex,
         @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
         System.out.format(" --- 响应 GET 查询某个水表的所有记录 从0索引第%d页 每页%d项"
-                + "/records/%d/pages?pageIndex=%d&pageSize=%d\n",
+                + " /records/%d/pages?pageIndex=%d&pageSize=%d\n",
             pageIndex, pageSize, waterId, pageIndex, pageSize);
         return waterRecordService.waterRecordFindAllByWaterIdPageable(waterId, pageSize, pageIndex);
     }

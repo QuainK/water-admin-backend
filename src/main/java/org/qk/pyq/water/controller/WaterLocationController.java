@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
+@RestController
 public class WaterLocationController {
     final WaterLocationService waterLocationService;
 

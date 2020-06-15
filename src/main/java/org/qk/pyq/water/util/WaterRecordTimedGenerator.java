@@ -50,7 +50,7 @@ public class WaterRecordTimedGenerator {
 
             // 日期时间
             Instant instant = Instant.now();
-            recordDate = instant.getEpochSecond();
+            recordDate = instant.toEpochMilli();
 
             // 添加记录
             waterRecordService.waterRecordAddOrUpdateOne(null, waterId, recordDate, instantUsage);
