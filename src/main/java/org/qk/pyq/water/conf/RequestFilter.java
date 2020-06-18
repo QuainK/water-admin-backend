@@ -1,4 +1,4 @@
-package org.qk.pyq.water.configuration;
+package org.qk.pyq.water.conf;
 
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;

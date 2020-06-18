@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity//实体类（和数据表映射的类）
 @Table(name = "water_location")//数据表
-public class WaterLocation {
+public class Location {
     @Id//主键
     @GeneratedValue(strategy = GenerationType.IDENTITY)//自动递增
     @Column(name = "water_id")//数据表字段

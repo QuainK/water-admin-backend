@@ -1,8 +1,8 @@
 package org.qk.pyq.water.util;
 
-import org.qk.pyq.water.entity.WaterLocation;
-import org.qk.pyq.water.service.WaterLocationService;
-import org.qk.pyq.water.service.WaterRecordService;
+import org.qk.pyq.water.entity.Location;
+import org.qk.pyq.water.service.LocationService;
+import org.qk.pyq.water.service.RecordService;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -18,31 +18,31 @@ import java.util.List;
  */
 @Component
 @EnableScheduling
-public class WaterRecordTimedGenerator {
-    final WaterLocationService waterLocationService;
-    final WaterRecordService waterRecordService;
+public class RecordTimedGenerator {
+    final LocationService locationService;
+    final RecordService recordService;
 
-    public WaterRecordTimedGenerator(WaterLocationService waterLocationService,
-                                     WaterRecordService waterRecordService) {
-        this.waterLocationService = waterLocationService;
-        this.waterRecordService = waterRecordService;
+    public RecordTimedGenerator(LocationService locationService,
+                                RecordService recordService) {
+        this.locationService = locationService;
+        this.recordService = recordService;
     }
 
     // 每分钟的第0秒执行执行一次
     @Scheduled(cron = "0 * * * * ?")
     public void generateNewRandomRecord() {
         // 读取全部水表
-        List<WaterLocation> waterLocationList = waterLocationService.waterLocationFindAll();
+        List<Location> locationList = locationService.retrieveList();
         // 遍历全部水表的位置信息并添加一条记录，瞬时用量随机生成
-        for (WaterLocation waterLocation : waterLocationList) {
+        for (Location location : locationList) {
             Integer waterId;
             String name;
             double instantUsage;
             StringBuilder stringInstantUsage = new StringBuilder();
             long recordDate;
 
-            waterId = waterLocation.getWaterId(); // 获取水表编号
-            name = waterLocation.getName(); //　获取水表名称
+            waterId = location.getWaterId(); // 获取水表编号
+            name = location.getName(); //　获取水表名称
 
             // 随机生成一个瞬时用量，保留2位小数，四舍五入
             stringInstantUsage.append(String.format("%.2f", Math.random() * 10));
@@ -53,7 +53,7 @@ public class WaterRecordTimedGenerator {
             recordDate = instant.toEpochMilli();
 
             // 添加记录
-            waterRecordService.waterRecordAddOrUpdateOne(null, waterId, recordDate, instantUsage);
+            recordService.addOrModifyOne(null, waterId, recordDate, instantUsage);
 
             // 终端输出
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

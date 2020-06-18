@@ -24,8 +24,6 @@
 
   - SpringBoot Web
 
-  - JDBC API
-
   - Spring Data JPA
 
   - MySQL Driver
@@ -68,11 +66,11 @@
 
 ### 1. Entity 实体层
 
-将数据库中数据表的字段映射成 Java 对象，提供 get/set 方法、toString 方法和构造方法等。数据库和数据表的设置在下文。
+将数据库中数据表的字段映射成 Java 对象，提供 getter/setter 方法等。数据库和数据表的设置在下文。
 
-### 2. Repository 持久层
+### 2. Dao 持久层
 
-对数据库进行数据访问的 DAO 层。此层提供接口，SpringBoot 自动配置好基本的和 SQL 查询语句相关的方法。开发人员不用考虑实现具体方法，也可以根据特定的方法命名规则添加一些和 SQL 查询语句关联的方法。
+数据访问对象层，此层提供接口，SpringBoot 自动配置具体实现方法，开发人员也可以在接口中根据特定的命名规则添加方法。
 
 ### 3. Service 业务层
 

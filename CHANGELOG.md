@@ -4,13 +4,45 @@
 
 ### 增加 Added
 
-### 修复 Fixed
-
 ### 修改 Changed
+
+### 修复 Fixed
 
 ### 优化 Refactored
 
 ### 移除 Removed
+
+---
+
+## 1.0.0 - 2020.06.18
+
+### 增加 Added
+
+- 删除水表位置同时删除其所有记录，节省数据表空间。
+
+### 优化 Refactored
+
+- 精简类名和方法名：
+
+  - 去除统一但冗余的前缀 Water/water。
+
+  - 各层方法名的名词改动。
+
+    - 所有：List；某个/一个：One；分页 Page。
+
+  - 各类方法名的动词改动。
+
+    - 控制层：与 HTTP 请求类型对应。
+
+      > get post put delete
+
+    - 业务层：尽量不与持久层以及 SQL 语句相同。
+
+      > retrieve add modify remove
+
+    - 持久层：预定的，未作改动。
+
+      > find save save delete
 
 ---
 
